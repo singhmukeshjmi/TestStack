@@ -1,0 +1,41 @@
+from django.urls import path
+from teststack import views, viewsets
+
+
+urlpatterns = [
+    # path('', views.base, name='index'),
+    path('home/', views.home, name='home'),
+    path('trytry/', views.trytry, name='trytry'),
+    
+    path('', views.homepage, name='homepage'),
+    path('userregistrationpage/', views.userregistrationpage, name='userregistrationpage'),
+    path('userprofilepage/', views.userprofilepage, name='userprofilepage'),
+    path('usermanagementpage/', views.usermanagementpage, name='usermanagementpage'),
+    path('project/create/', views.ProjectCreateView.as_view(), name='projectcreationpage'),
+    path('project/<int:pk>/', views.ProjectEditView.as_view(), name='projecteditingpage'),
+    path('projects/', views.ProjectOverview.as_view(), name='projectoverviewpage'),
+    path('testcase/create/', views.TestCaseCreateView.as_view(), name='testcasecreationpage'),
+    path('testcase/<int:pk>/', views.TestCaseEditView.as_view(), name='testcaseeditingpage'),
+    path('testcases/', views.TestCaseOverview.as_view(), name='testcaseoverviewpage'),
+    path('bug/create/', views.BugCreateView.as_view(), name='bugcreationpage'),
+    path('bug/<int:pk>/', views.BugEditView.as_view(), name='bugeditingpage'),
+    path('bugs/', views.BugOverview.as_view(), name='bugoverviewpage'),
+    path('projectassignmentpage/', views.projectassignmentpage, name='projectassignmentpage'),
+    path('projectstatustrackingpage/', views.projectstatustrackingpage, name='projectstatustrackingpage'),
+    path('testcaseassignmentpage/', views.testcaseassignmentpage, name='testcaseassignmentpage'),
+    path('testcaseexecutionpage/', views.testcaseexecutionpage, name='testcaseexecutionpage'),
+    path('testcasestatustrackingpage/', views.testcasestatustrackingpage, name='testcasestatustrackingpage'),
+    path('testexecutionassignmentpage/', views.testexecutionassignmentpage, name='testexecutionassignmentpage'),
+    path('testexecutionstatustrackingpage/', views.testexecutionstatustrackingpage, name='testexecutionstatustrackingpage'),
+    path('testcaseexecutionreportspage/', views.testcaseexecutionreportspage, name='testcaseexecutionreportspage'),
+    path('testexecutionreportspage/', views.testexecutionreportspage, name='testexecutionreportspage'),
+    path('summaryreportspage/', views.summaryreportspage, name='summaryreportspage'),
+    path('systemconfigurationpage/', views.systemconfigurationpage, name='systemconfigurationpage'),
+    path('administrationpage/', views.administrationpage, name='administrationpage'),
+    path('helpandsupportpage/', views.helpandsupportpage, name='helpandsupportpage'),
+    path('apitry/', views.apitry, name='apitry'),
+    path('html/create/', views.HtmlCreateView.as_view(), name='htmlcreationpage'),
+    path('html/<int:pk>/', views.HtmlEditView.as_view(), name='htmleditingpage'),
+    path('b/', viewsets.BugViewSet.as_view({'get': 'list'}), name='bugviewset'),
+    path('b/<int:pk>/', viewsets.BugViewSet.as_view({'get': 'retrieve'}), name='bugviewsetretrieve'),
+]

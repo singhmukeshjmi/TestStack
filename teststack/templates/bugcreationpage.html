@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block page_title %}Project Creation Page{% endblock %}
+{% block body_content %}
+<h1>This is the Bug creation page</h1>
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+        {{field.label_tag}}{{field}}<br>
+    {% endfor %}
+    <input type="submit" class='btn btn-primary' value="Create Ticket">
+</form>
+<h3>
+    Comments
+</h3>
+{% for comment in comments %}
+    <br>
+    <div class="row" id="comment_id_{{comment.sno}}">
+        <div class="row">
+            <div>
+                <img src="{% static 'images/user_icon.png' %}" width="20" height="20">
+                <span>{{comment.user.get_full_name}}</span>
+                <span class="badge text-bg-info">{{comment.created_at | naturaltime}}</span><br>
+                <!-- <span>
+                    <button onclick="copy_to_clipboard('comment_id_')" id="comment_id_">Copy</button>
+                </span> -->
+            </div>
+        </div>
+
+        <div class="card">
+            <!-- <div class="card-header">
+            </div> -->
+            <div class="card-body">
+                <div>
+                    {{comment.comment}}
+                </div>
+            </div>
+            <div class="card-footer">
+                    {% if request.user.id is comment.user.id %}
+                    <div class="row">
+                        <div class="col-1">
+                            <a type="button" name="edit_comment">Edit</a>
+                        </div>
+                        <div class="col-2">
+                            <form action="" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{comment.sno}}" name="comment_delete">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    <div class="row">
+        <div class="col-2">
+            {{request.user.get_full_name}}
+        </div>
+        <div class="col-7">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if commentform %}
+                    <input type="hidden" name="user" value="{{request.user}}">
+                    <label for="comment">Comment</label>
+                    <input type="textarea" class="htmlfield" name="comment" value="">
+                    <input type="hidden" name="bug" value="{{form.instance.id}}">
+                {% endif %}
+                <input type="submit" class='btn btn-primary' value="Save">
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

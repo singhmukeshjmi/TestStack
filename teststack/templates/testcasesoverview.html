@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block page_title %}Testcases Overview Page{% endblock %}
+{% block body_content %}
+<h1>This is the Testcases overview page</h1>
+    <form action="" method="GET">
+        {% for field in filterform.form %}
+        {{field.label_tag}}{{field}}
+        {% endfor %}
+        <input type="submit" value="Filter">
+    </form>
+
+    <table class="table table-striped targetoverviewtable">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Project</th>
+            <th scope="col">Description</th>
+            <th scope="col">Steps to Run</th>
+            <th scope="col">Expected Outcome</th>
+            <th scope="col">Created By</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Updated At</th>
+            <th scope="col">Testcase Type</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for testcase in testcases %}
+            <tr>
+                <th scope="row"><a href={% url 'testcaseeditingpage' testcase.id %}>{{testcase.id}}</a></th>
+                <td>{{testcase.name}}</td>
+                <td>{{testcase.project}}</td>
+                <td>{{testcase.description}}</td>
+                <td>{{testcase.steps_to_run}}</td>
+                <td>{{testcase.expected_outcome}}</td>
+                <td>{{testcase.created_by}}</td>
+                <td>{{testcase.created_at}}</td>
+                <td>{{testcase.updated_at}}</td>
+                <td>{{testcase.testcase_type}}</td>
+            </tr>
+            {% endfor %}        
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+

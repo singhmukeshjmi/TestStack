@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_title %}Project Creation Page{% endblock %}
+{% block body_content %}
+<h1>This is the Testcase creation page</h1>
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+        {{field.label_tag}}{{field}}<br>
+    {% endfor %}
+    <input type="submit" class='btn btn-primary' value="Create Project">
+</form>
+
+{% endblock %}

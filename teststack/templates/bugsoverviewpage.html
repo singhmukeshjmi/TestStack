@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block page_title %}Bugs Overview Page{% endblock %}
+{% block body_content %}
+<h1>This is the Bugs overview page</h1>
+
+    <table class="table table-striped targetoverviewtable">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Project</th>
+            <th scope="col">TestCase</th>
+            <th scope="col">Description</th>
+            <th scope="col">Steps to Reproduce</th>
+            <th scope="col">Created By</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Updated At</th>
+            <th scope="col">Bug Category</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for bug in bugs %}
+            <tr>
+                <th scope="row"><a href={% url 'bugeditingpage' bug.id %}>{{bug.id}}</a></th>
+                <td>{{bug.name}}</td>
+                <td>{{bug.project}}</td>
+                <td>{{bug.testcase}}</td>
+                <td>{{bug.description}}</td>
+                <td>{{bug.steps_to_reproduce}}</td>
+                <td>{{bug.created_by}}</td>
+                <td>{{bug.created_at}}</td>
+                <td>{{bug.updated_at}}</td>
+                <td>{{bug.bug_category}}</td>
+            </tr>
+            {% endfor %}        
+        </tbody>
+        <!-- <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Project</th>
+                <th>Testcase</th>
+                <th>Description</th>
+                <th>Steps to reproduce</th>
+                <th>Created by</th>
+                <th>Created at</th>
+                <th>Updated at</th>
+                <th>Bug category</th>
+            </tr>
+        </tfoot> -->
+    </table>
+
+{% endblock %}
+
+
+
